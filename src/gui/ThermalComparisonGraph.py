@@ -5,139 +5,154 @@ from src.image.ThermalImage import ThermalImage
 
 
 class ThermalComparisonGraph:
+    # Obter as dimensões da imagem térmica
+    # thermal_height, thermal_width = self.thermalImage.data.shape[:2]
+    # Para o modelo C5 esperamos que se mantenha na forma: hermal_height, thermal_width = [120 , 160]
+    # Calcular o deslocamento necessário para alinhar os recortes
+    SCALING_FACTOR = 2.75
+    CROP_RANGE = {# Estes valores são obtidos de : cropped_rgb_image = rgb_np[y_offset:y_offset+int(2.75*thermal_height), x_offset:x_offset+int(2.75*thermal_width)]
+        "xmin": 108,
+        "xmax": 548,
+        "ymin": 62,
+        "ymax": 392
+    }
+
+    TEXT_OFFSET = {'x': 3.0, 'y': -5}
+    THERMAL = 0
+    RGB = 1
+
+
     def __init__(self, rgbImage: RGBImage, thermalImage: ThermalImage, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.rgbImage = rgbImage
         self.thermalImage = thermalImage
 
-    def plot(self, *args, **kwargs):
+        self.fig, self.ax = plt.subplots(1, 2, figsize=(12, 6))
 
-        # Obter as dimensões da imagem térmica
-        thermal_height, thermal_width = self.thermalImage.data.shape[:2]
-        # Para o modelo C5 esperamos que se mantenha na forma: hermal_height, thermal_width = [120 , 160]
+        self._cursorTextInit()
+        self._temperatureTextInit()
 
-        # Calcular o deslocamento necessário para alinhar os recortes
-        y_offset = 62 #Ajuste visual refinado
-        x_offset = 108 #Ajuste visual refinado
 
+
+    def _cursorTextInit(self):
+        #Cursor a ser plotado na imagem termográfica
+        self.cursor_text = {
+            self.THERMAL : self.ax[self.THERMAL].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan'),
+            self.RGB: self.ax[self.RGB].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan')
+        }
+
+        self.cursor_text[self.THERMAL].set_visible(False)
+        self.cursor_text[self.RGB].set_visible(False)
+
+
+    def _temperatureTextInit(self):
+        #Texto do valor da temperatura para ser plotado na imagem termográfica
+        self.temp_text = {
+            self.THERMAL : self.ax[self.THERMAL].text(0, 0, "", color='white', bbox=dict(boxstyle="round,pad=0.3", fc='black', alpha=0.5)),
+            self.RGB: self.ax[self.RGB].text(0, 0, "", color='white', bbox=dict(boxstyle="round,pad=0.3", fc='black', alpha=0.5))
+        }
+        self.temp_text[self.THERMAL].set_visible(False)
+        self.temp_text[self.RGB].set_visible(False)
+    def plot(self):
         # Recortar a imagem RGB para ficar igual à imagem térmica
-        cropped_rgb_image = self.rgbImage.data[y_offset:392, x_offset:548]
-        # Estes valores acima são obtidos de : cropped_rgb_image = rgb_np[y_offset:y_offset+int(2.75*thermal_height), x_offset:x_offset+int(2.75*thermal_width)]
-
-        fig, ax = plt.subplots(1,2, figsize=(12, 6))
+        cropped_rgb_image = self.rgbImage.data[
+                            self.CROP_RANGE["ymin"]:self.CROP_RANGE["ymax"],
+                            self.CROP_RANGE["xmin"]:self.CROP_RANGE["xmax"]
+                            ]
 
         # Plotar as imagens
-        ax[0].imshow(self.thermalImage.data, cmap='hot')
-        ax[1].imshow(cropped_rgb_image)
+        self.ax[0].imshow(self.thermalImage.data, cmap='hot')
+        self.ax[1].imshow(cropped_rgb_image)
 
         # Títulos das imagens
-        ax[0].set_title("Thermal Image")
-        ax[1].set_title("RGB Image")
+        self.ax[0].set_title("Thermal Image")
+        self.ax[1].set_title("RGB Image")
 
-        #Cursor a ser plotado na imagem termográfica
-        cursor_text_thermal = ax[0].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan')
-        cursor_text_thermal.set_visible(False)
+        # O mpl_connect faz com que a função seja ativada ao clicar com o mouse, relacionando o evento "clicar" com a função
+        # self.fig.canvas.mpl_connect('button_release_event', self._on_button_release)
+        self.fig.canvas.mpl_connect('motion_notify_event', self._update_temp_text)
 
-        #Cursor a ser plotado na imagem RGB
-        cursor_text_rgb = ax[1].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan')
-        cursor_text_rgb.set_visible(False)
+        plt.show()
 
-        #Texto do valor da temperatura para ser plotado na imagem termográfica
-        temp_text_thermal = ax[0].text(0, 0, "", color='white', bbox=dict(boxstyle="round,pad=0.3",fc='black', alpha=0.5))
 
-        #Texto do valor da temperatura para ser plotado na imagem rgb recortada
-        temp_text_thermal_rgb = ax[1].text(0, 0, "", color='white', bbox=dict(boxstyle="round,pad=0.3",fc='black', alpha=0.5))
-
-        def update_temp_text(event):
-            if not event.inaxes or event.inaxes == ax[1]: #Quando o mouse estiver sobre a imagem RGB recortada
-                x, y = round(event.xdata), round(event.ydata)
-
-                #Função para encontrar a correspondência entre as posições das imagens (aproximação calculada com dados visuais e refinamento dos mesmos)
-                A = 2.75 #2.75034 (valor calculado com dados visuais)
-                B = 0.0 #1.26921 (valor calculado com dados visuais)
-                #Modifiquei o valor de B para zero, pois a expectativa é que a transformação seja linear (x1,y1)=(A*x,A*y)
-                x1 = round((x-B)/A)
-                y1 = round((y-B)/A)
-
-                temperature = self.thermalImage.data[y1,x1] # O valor da temperatura na posição x1,y1 (acurácia validada)
-
-                #Caso seja desejado plotar a temperatura sobre a imagem RGB
-                #temp_text_thermal_rgb.set_text(f'{temperature:.2f} ºC')
-                #temp_text_thermal_rgb.set_position((x, y))
-
-                temp_text_thermal.set_text(f'{temperature:.2f} ºC')
-                temp_text_thermal.set_position((x1+3.0, y1-5.0)) #Correção da posição do texto, para não se sobrepor ao cursor
-
-                cursor_text_thermal.set_visible(True)
-                #cursor_text_thermal.xy = (x1-5.5, y1+3.0) # Correção da posição do cursor (a temperatura se mantém em x1,y1)
-                cursor_text_thermal.xy = (x1, y1)
-                cursor_text_thermal.set_text('+')
-                cursor_text_thermal.set_fontsize(24)
-
-                #Deixando o cursor sobre a imagem RGB invisível
-                cursor_text_rgb.set_visible(False)
-
-                fig.canvas.draw_idle()
-                return
-
+    def _update_temp_text(self, event):
+        if event.inaxes == self.ax[1]: #Quando o mouse estiver sobre a imagem RGB recortada
             x, y = round(event.xdata), round(event.ydata)
-            #if 0<= x < thermal_np.shape[1] and 0<= y < thermal_np.shape[0]
-            if not event.inaxes or event.inaxes == ax[0]: #Quando o mouse estiver sobre a imagem térmica
-                #Modifique caso queira plotar a temperatura sobre a imagem RGB simultaneamente
-                temp_text_thermal_rgb.set_text("")
+            x1, y1 = self.mapRGBToTermal(x, y)
 
-                #Valor extato na temperatura
-                temperature = self.thermalImage.data[y,x]
-                temp_text_thermal.set_text(f'{temperature:.2f} ºC')
-                temp_text_thermal.set_position((x+4, y-4)) #offset para não ficar em cima do mouse
+            self._plotTemperatureText(x, y, x1, y1, self.RGB)
+            self._plotCursorText(x1, y1, self.THERMAL)
 
-                #Cursor sobre a imagem termética não será exibido
-                cursor_text_thermal.set_visible(False)
+            self.fig.canvas.draw_idle()
 
-                #Correspondência inversa da x1,y1
-                A = 2.75 #2.75034 (valor calculado com dados visuais)
-                B = 0.0 #1.26921 (valor calculado com dados visuais)
-                #Modifiquei o valor de B para zero, pois a expectativa é que a transformação seja linear (x2,y2)=(A*x,A*y)
-                x2 = round(A*x+B)
-                y2 = round(A*y+B)
+        elif event.inaxes == self.ax[0]: #Quando o mouse estiver sobre a imagem térmica
+            x, y = round(event.xdata), round(event.ydata)
+            x1, y1 = self.mapThermalToRGB(x, y)
 
-                #Exibindo um cursor sobre a imagem RGB
-                cursor_text_rgb.set_visible(True)
-                #cursor_text_rgb.xy = (x2-9.0, y2+12.0) # Ajuste da posição do cursor na imagem RGB
-                cursor_text_rgb.xy = (x2, y2)
-                cursor_text_rgb.set_text('+')
-                cursor_text_rgb.set_fontsize(24)
+            self._plotTemperatureText(x, y, x, y, self.THERMAL)
+            self._plotCursorText(x1, y1, self.RGB)
 
-                fig.canvas.draw_idle()
+            self.fig.canvas.draw_idle()
 
         #------------------------------------
         # Desenvolvimento do zoom síncrono:
         # Funçao que copia o clique do mouse para a outra janela
-        def on_button_release(event):
-            # Se o clique for na primeira imagem, faz uma cópia na segunda
-            if event.inaxes == ax[0]:
-                limites_x = [(x*2.75) for x in (ax[0].get_xlim())] # Consiste em obter os limites de x e y atuais da imagem Thermal, e para cada elemento da tupla (ax[0].get_xlim()) é multiplicado por 2,75, a qual se torna uma lista que diz qual deve ser os novos limites da imagem RGB recortada para coincidir com zoom feito na Thermal
-                limites_y = [(y*2.75) for y in (ax[0].get_ylim())] # Analogo ao anterior
 
-                ax[1].set_xlim(limites_x)   # Os limites da imagem RGB sao atualizados
-                ax[1].set_ylim(limites_y)
+    def _on_button_release(self, event):
+        # Se o clique for na primeira imagem, faz uma cópia na segunda
+        if event.inaxes == self.ax[0]:
+            self._translateLimits(self.ax, 0, self.SCALING_FACTOR)
+            self.fig.canvas.draw_idle()
+        # Se o clique for na segunda imagem, faz uma cópia na primeira
+        elif event.inaxes == self.ax[1]:
+            self._translateLimits(self.ax, 1, 1 / self.SCALING_FACTOR)
+            self.fig.canvas.draw_idle()
 
-                fig.canvas.draw_idle()
-            # Se o clique for na segunda imagem, faz uma cópia na primeira
-            elif event.inaxes == ax[1]:
-                limites_x = [(x/2.75) for x in (ax[1].get_xlim())]   # Consiste em obter os limites de x e y atuais da imagem RGB, e para cada elemento da tupla (ax[0].get_xlim()) é dividido por 2,75, a qual se torna uma lista que diz qual deve ser os novos limites da imagem Thermal para coincidir com zoom feito na RGB
-                limites_y = [(y/2.75) for y in (ax[1].get_ylim())]
+    @staticmethod
+    def _translateLimits(axis, index: int, constant: float):
+        limites_x = [(x*constant) for x in (axis[index].get_xlim())] # Consiste em obter os limites de x e y atuais da imagem Thermal, e para cada elemento da tupla (ax[0].get_xlim()) é multiplicado por 2,75, a qual se torna uma lista que diz qual deve ser os novos limites da imagem RGB recortada para coincidir com zoom feito na Thermal
+        limites_y = [(y*constant) for y in (axis[index].get_ylim())] # Analogo ao anterior
 
-                ax[0].set_xlim(limites_x)   # Os limites da imagem Thermal sao atualizados
-                ax[0].set_ylim(limites_y)
+        axis[not index].set_xlim(limites_x)   # Os limites da imagem RGB sao atualizados
+        axis[not index].set_ylim(limites_y)
 
-                fig.canvas.draw_idle()
+    def _plotCursorText(self, x, y, canvas: int):
+        self.cursor_text[canvas].set_visible(True)
+        self.cursor_text[not canvas].set_visible(False)
+        self.cursor_text[canvas].set_text('+')
+        self.cursor_text[canvas].set_fontsize(24)
+        self.cursor_text[canvas].xy = (x, y)
+        # self.cursor_text[canvas].xy = (x-5.5, y+3.0) # Correção da posição do cursor (a temperatura se mantém em x1,y1)
 
-        # O mpl_connect faz com que a função seja ativada ao clicar com o mouse, relacionando o evento "clicar" com a função
-        fig.canvas.mpl_connect('button_release_event', on_button_release)
-        #------------------------------------
+    def _plotTemperatureText(self, x, y, referenceX, referenceY, canvas: int):
+        self.temp_text[canvas].set_visible(True)
+        self.temp_text[not canvas].set_visible(False)
+        temperature = self._getTemperatureFromPosition(referenceX, referenceY) # O valor da temperatura na posição x1,y1 (acurácia validada)
 
-        fig.canvas.mpl_connect('motion_notify_event', update_temp_text)
+        #Caso seja desejado plotar a temperatura sobre a imagem RGB
+        #temp_text_thermal_rgb.set_text(f'{temperature:.2f} ºC')
+        #temp_text_thermal_rgb.set_position((x, y))
 
-        plt.show()
+        self.temp_text[canvas].set_text(f'{temperature:.2f} ºC')
+        self.temp_text[canvas].set_position((x + self.TEXT_OFFSET['x'], y + self.TEXT_OFFSET['x'])) #Correção da posição do texto, para não se sobrepor ao cursor
+
+    def _getTemperatureFromPosition(self, x, y):
+        return self.thermalImage.data[y, x]
+
+    def mapThermalToRGB(self, x, y):
+        #Função para encontrar a correspondência entre as posições das imagens (aproximação calculada com dados visuais e refinamento dos mesmos)
+        # A, B = 2.75034, 1.26921(valor calculado com dados visuais)
+        # #Modifiquei o valor de B para zero, pois a expectativa é que a transformação seja linear (x1,y1)=(A*x,A*y)
+        A, B = self.SCALING_FACTOR, 0.0
+        x1 = round(A*x+B)
+        y1 = round(A*y+B)
+
+        return x1, y1
+
+    def mapRGBToTermal(self, x, y):
+        A, B = self.SCALING_FACTOR, 0.0
+        x1 = round((x-B)/A)
+        y1 = round((y-B)/A)
+
+        return x1, y1
