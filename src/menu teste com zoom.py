@@ -1,18 +1,22 @@
 import tkinter as tk
 from tkinter import filedialog
-from dependencies.flir_image_extractor import FlirImageExtractor
+from dependencies.FlirImageExtractor_master.flir_image_extractor import FlirImageExtractor
 import argparse
 from PIL import Image, ImageTk
+
+from src.gui.ThermalComparisonGraph import ThermalComparisonGraph
+from src.infra.FlirImageFactory import FlirImageFactory
+
 
 def processar_imagem(file_path):
     parser = argparse.ArgumentParser(description='Exemplo de processamento de imagem com FlirImageExtractor')
     parser.add_argument('-d', '--debug', help='Ativar o modo de depuração', required=False, action='store_true')
     args = parser.parse_args()
 
-    fie = FlirImageExtractor(exiftool_path=r'C:/Users/gabri/OneDrive/Área de Trabalho/alt2/Programação/Python/Projextensão zoom imagem/FlirImageExtractor-master/exiftool.exe', is_debug=args.debug)
+    fie = FlirImageExtractor(exiftool_path=r'C:/Users/gabri/OneDrive/Área de Trabalho/alt2/Programação/Python/Projextensão zoom imagem/FlirImageExtractor_master/exiftool.exe', is_debug=args.debug)
 
-    fie.process_image(file_path)
-    rgb_image = fie.get_rgb_np()
+    rgb_image = FlirImageFactory.getRGBImageFromPath(file_path)
+    thermal_image = FlirImageFactory.getThermalImageFromPath(file_path)
     
     original_image = Image.open(file_path)
     original_image = ImageTk.PhotoImage(original_image)
@@ -23,7 +27,7 @@ def processar_imagem(file_path):
     label_original = tk.Label(original_window, image=original_image)
     label_original.pack()
     
-    fie.plot()
+    ThermalComparisonGraph(rgb_image, thermal_image).plot()
     
 def abrir_arquivo():
     file_path = filedialog.askopenfilename()
