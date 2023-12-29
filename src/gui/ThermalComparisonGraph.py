@@ -10,7 +10,7 @@ class ThermalComparisonGraph:
     # Para o modelo C5 esperamos que se mantenha na forma: hermal_height, thermal_width = [120 , 160]
     # Calcular o deslocamento necessário para alinhar os recortes
     SCALING_FACTOR = 2.75
-    CROP_RANGE = {# Estes valores são obtidos de : cropped_rgb_image = rgb_np[y_offset:y_offset+int(2.75*thermal_height), x_offset:x_offset+int(2.75*thermal_width)]
+    CROP_RANGE = {  # Estes valores são obtidos de : cropped_rgb_image = rgb_np[y_offset:y_offset+int(2.75*thermal_height), x_offset:x_offset+int(2.75*thermal_width)]
         "xmin": 108,
         "xmax": 548,
         "ymin": 62,
@@ -77,18 +77,18 @@ class ThermalComparisonGraph:
 
 
     def _update_temp_text(self, event):
-        if event.inaxes == self.ax[1]: #Quando o mouse estiver sobre a imagem RGB recortada
+        if event.inaxes == self.ax[1]:  # Quando o mouse estiver sobre a imagem RGB recortada
             x, y = round(event.xdata), round(event.ydata)
-            x1, y1 = self.mapRGBToTermal(x, y)
+            x1, y1 = self._mapRGBToThermal(x, y)
 
             self._plotTemperatureText(x, y, x1, y1, self.RGB)
             self._plotCursorText(x1, y1, self.THERMAL)
 
             self.fig.canvas.draw_idle()
 
-        elif event.inaxes == self.ax[0]: #Quando o mouse estiver sobre a imagem térmica
+        elif event.inaxes == self.ax[0]:  # Quando o mouse estiver sobre a imagem térmica
             x, y = round(event.xdata), round(event.ydata)
-            x1, y1 = self.mapThermalToRGB(x, y)
+            x1, y1 = self._mapThermalToRGB(x, y)
 
             self._plotTemperatureText(x, y, x, y, self.THERMAL)
             self._plotCursorText(x1, y1, self.RGB)
@@ -140,7 +140,7 @@ class ThermalComparisonGraph:
     def _getTemperatureFromPosition(self, x, y):
         return self.thermalImage.data[y, x]
 
-    def mapThermalToRGB(self, x, y):
+    def _mapThermalToRGB(self, x, y):
         #Função para encontrar a correspondência entre as posições das imagens (aproximação calculada com dados visuais e refinamento dos mesmos)
         # A, B = 2.75034, 1.26921(valor calculado com dados visuais)
         # #Modifiquei o valor de B para zero, pois a expectativa é que a transformação seja linear (x1,y1)=(A*x,A*y)
@@ -150,7 +150,7 @@ class ThermalComparisonGraph:
 
         return x1, y1
 
-    def mapRGBToTermal(self, x, y):
+    def _mapRGBToThermal(self, x, y):
         A, B = self.SCALING_FACTOR, 0.0
         x1 = round((x-B)/A)
         y1 = round((y-B)/A)
