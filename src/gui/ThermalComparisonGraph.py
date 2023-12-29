@@ -81,10 +81,6 @@ class ThermalComparisonGraph:
         limites_x = [(x * gain) for x in (self.ax[canvas].get_xlim())] # Consiste em obter os limites de x e y atuais da imagem RGB ou Termica, e para cada elemento da tupla (ax[0].get_xlim()) é multiplicado por 2,75, a qual se torna uma lista que diz qual deve ser os novos limites da imagem RGB recortada para coincidir com zoom feito na Thermal
         limites_y = [(y * gain) for y in (self.ax[canvas].get_ylim())] # Analogo ao anterior
 
-        print(limites_x, limites_y)
-        print(canvas, int(not canvas))
-        print(self.ax[canvas])
-        print(self.ax[int(not canvas)])
         self.ax[int(not canvas)].set_xlim(limites_x)   # Os limites da outra imagem sao atualizados
         self.ax[int(not canvas)].set_ylim(limites_y)
 
@@ -106,7 +102,7 @@ class ThermalComparisonGraph:
 
     def _plotCursorText(self, x, y, canvas: int):
         self.cursor_text[canvas].set_visible(True)
-        self.cursor_text[not canvas].set_visible(False)
+        self.cursor_text[int(not canvas)].set_visible(False)
 
         self.cursor_text[canvas].set_text('+')
         self.cursor_text[canvas].set_fontsize(24)
@@ -114,7 +110,7 @@ class ThermalComparisonGraph:
 
     def _plotTemperatureText(self, x, y, referenceX, referenceY, canvas: int):
         self.temp_text[canvas].set_visible(True)
-        self.temp_text[not canvas].set_visible(False)
+        self.temp_text[int(not canvas)].set_visible(False)
 
         temperature = self.thermalImage.getTemperatureAt(referenceX, referenceY)
         self.temp_text[canvas].set_text(f'{temperature:.2f} ºC')
