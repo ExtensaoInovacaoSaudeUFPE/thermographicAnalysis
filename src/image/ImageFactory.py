@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from src.model.Image import Image
-from src.model.ThermalImage import ThermalImage
+from src.image.RGBImage import RGBImage
+from src.image.ThermalImage import ThermalImage
 
 class ImageFactory(ABC):
     def __init__(self, image_path):
@@ -9,7 +9,7 @@ class ImageFactory(ABC):
 
     @staticmethod
     @abstractmethod
-    def getRawImageFromPath(path: str) -> Image:
+    def getRGBImageFromPath(path: str) -> RGBImage:
         pass
 
     @staticmethod

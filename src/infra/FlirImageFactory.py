@@ -1,18 +1,18 @@
-from src.model.Image import Image
-from src.model.ImageFactory import ImageFactory
-from src.model.ThermalImage import ThermalImage
+from src.image.ImageFactory import ImageFactory
+from src.image.RGBImage import RGBImage
+from src.image.ThermalImage import ThermalImage
 
 from dependencies.FlirImageExtractor_master.flir_image_extractor import FlirImageExtractor
 
 class FlirImageFactory(ImageFactory):
-    exitool_path = 'dependencies/flir_image_extractor/exiftool.exe'
+    exitool_path = r'C:\\Users\\igor_\\Documents\\dev\\ufpe\\extensaoColaborativa\\termographicAnalysis\\dependencies\\flir_image_extractor\\exiftool.exe'
 
     @staticmethod
-    def getRawImageFromPath(path: str) -> Image:
+    def getRGBImageFromPath(path: str) -> RGBImage:
         flirImageExtractor = FlirImageExtractor(exiftool_path=FlirImageFactory.exitool_path)
         flirImageExtractor.process_image(path)
 
-        return Image(flirImageExtractor.extract_embedded_image())
+        return RGBImage(flirImageExtractor.extract_embedded_image())
 
     @staticmethod
     def getThermalImageFromPath(path: str) -> ThermalImage:
