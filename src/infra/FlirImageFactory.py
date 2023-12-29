@@ -5,7 +5,7 @@ from src.image.ThermalImage import ThermalImage
 from dependencies.FlirImageExtractor_master.flir_image_extractor import FlirImageExtractor
 
 class FlirImageFactory(ImageFactory):
-    exitool_path = r'C:\\Users\\igor_\\Documents\\dev\\ufpe\\extensaoColaborativa\\termographicAnalysis\\dependencies\\flir_image_extractor\\exiftool.exe'
+    exitool_path = r'C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\dependencies\exiftool\exiftool.exe'
 
     @staticmethod
     def getRGBImageFromPath(path: str) -> RGBImage:
