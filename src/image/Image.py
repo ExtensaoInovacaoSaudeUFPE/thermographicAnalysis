@@ -5,3 +5,6 @@ class Image(ABC):
 
     def __init__(self, data: np.ndarray):
         self.data = data
+
+    def crop(self, xmin, xmax, ymin, ymax):
+        return Image(self.data[ymin:ymax, xmin:xmax])
