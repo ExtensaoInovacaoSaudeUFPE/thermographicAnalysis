@@ -1,9 +1,11 @@
 
 <h3>Download project</h3>
+
 ```console
 git clone https://github.com/automaniac/termographicAnalysis.git ./thermographicAnalysis
 cd thermographicAnalysis
 ```
+
 <h3> Create Virtual Environment </h3>
 on Windows:
 
