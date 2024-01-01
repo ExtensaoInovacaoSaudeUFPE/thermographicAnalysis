@@ -1,4 +1,4 @@
-from src.gui.Home import Home
+from src.gui.home.Home import Home
 import os
 
 def main():

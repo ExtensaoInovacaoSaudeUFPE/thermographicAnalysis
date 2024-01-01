@@ -41,8 +41,8 @@ class ThermalComparisonGraph:
     def _canvasInit(self):
         self.fig, self.ax = plt.subplots(1, 2, figsize=(12, 6))
 
-        self.ax[0].set_title("Thermal Image")
-        self.ax[1].set_title("RGB Image")
+        self.ax[0].set_title("Imagem Termográfica")
+        self.ax[1].set_title("Imagem RGB")
 
     def _cursorTextInit(self):
         self.cursor_text = {
