@@ -1,20 +1,22 @@
 
 <h3>Download project</h3>
-```bash
-git clone https://github.com/automaniac/termographicAnalysis.git .
+
+```console
+git clone https://github.com/automaniac/termographicAnalysis.git ./thermographicAnalysis
 cd thermographicAnalysis
 ```
+
 <h3> Create Virtual Environment </h3>
 on Windows:
 
-```bash
-python3 -m venv venv
-venv\Scripts\activate.ps1
+```console
+    python3 -m venv venv
+    venv\Scripts\activate.ps1
 ```
 
 <h3> Install dependencies </h3>
 
-```bash
+```console
 pip install -r requirements.txt
 ```
 
