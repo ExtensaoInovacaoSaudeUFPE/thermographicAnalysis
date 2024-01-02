@@ -25,3 +25,14 @@ pip install -r requirements.txt
 ```console
 python /src/main.py
 ```
+
+<h3> Create Executable </h3>
+    
+```console
+auto-py-to-exe
+```
+<h4>On the gui:</h4>
+
+    Onefile: select the main.py file
+    Console Window: select Window Based
+    Click CONVERT .PY TO .EXE
