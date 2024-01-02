@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77bf899f-7382-41c9-9008-4d958d0c189f" name="Changes" comment="added auto-py-to-exe dependency&#10;moved main.py to the root folder">
+    <list default="true" id="77bf899f-7382-41c9-9008-4d958d0c189f" name="Changes" comment="Frontend layer: merge controller and view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/gui/ThermalComparisonGraphManualTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/gui/ThermalComparisonGraphManualTest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -65,7 +70,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;development-reorganizing&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -83,11 +88,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src\gui\routing" />
+      <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src\image" />
+      <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src\image\types" />
       <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis" />
       <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src" />
-      <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src\gui\home" />
-      <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\dependencies\exiftool" />
-      <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src\infra" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -197,7 +202,13 @@
       <workItem from="1704138599338" duration="8868000" />
       <workItem from="1704158474450" duration="7356000" />
       <workItem from="1704166038341" duration="3555000" />
-      <workItem from="1704222419001" duration="5052000" />
+      <workItem from="1704222419001" duration="5735000" />
+      <workItem from="1704242784108" duration="27000" />
+      <workItem from="1704574071396" duration="2016000" />
+      <workItem from="1704580804053" duration="8780000" />
+      <workItem from="1704596873704" duration="2539000" />
+      <workItem from="1704599668763" duration="8083000" />
+      <workItem from="1704608121451" duration="519000" />
     </task>
     <task id="LOCAL-00001" summary="Raw Files">
       <option name="closed" value="true" />
@@ -399,7 +410,47 @@
       <option name="project" value="LOCAL" />
       <updated>1704227717841</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="added auto-py-to-exe instructions on readme.md">
+      <option name="closed" value="true" />
+      <created>1704228132635</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1704228132635</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added routing capabilities">
+      <option name="closed" value="true" />
+      <created>1704608398384</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1704608398384</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Repository and Service layers for images added">
+      <option name="closed" value="true" />
+      <created>1704608507350</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1704608507350</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Repository and Service layers for images added">
+      <option name="closed" value="true" />
+      <created>1704608537156</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1704608537156</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Frontend layer: merge controller and view">
+      <option name="closed" value="true" />
+      <created>1704608596962</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1704608596962</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,13 +485,17 @@
     <MESSAGE value="Home screen reworked:&#10;Help button to display a help advice&#10;Loaded image embedded in Home screen&#10;Central button to search for image&#10;New Buttons for viewing graph and changing the picture" />
     <MESSAGE value="Frontend Architecture changed to Model View Presenter" />
     <MESSAGE value="added auto-py-to-exe dependency&#10;moved main.py to the root folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="added auto-py-to-exe dependency&#10;moved main.py to the root folder" />
+    <MESSAGE value="added auto-py-to-exe instructions on readme.md" />
+    <MESSAGE value="added routing capabilities" />
+    <MESSAGE value="Repository and Service layers for images added" />
+    <MESSAGE value="Frontend layer: merge controller and view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Frontend layer: merge controller and view" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/termographicAnalysis$FlirImageExtractor.coverage" NAME="FlirImageExtractor Coverage Results" MODIFIED="1703814784294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/infra" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$menu_teste_com_zoom.coverage" NAME="menu teste com zoom Coverage Results" MODIFIED="1703823266354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$ThermalComparisonGraph.coverage" NAME="ThermalComparisonGraph Coverage Results" MODIFIED="1703826813791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/gui" />
-    <SUITE FILE_PATH="coverage/termographicAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1704227502645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/termographicAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1704607364370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1703817768796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dependencies/flir_image_extractor" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$Home.coverage" NAME="Home Coverage Results" MODIFIED="1703877383333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/gui" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$main_generic.coverage" NAME="main_generic Coverage Results" MODIFIED="1703817776581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
