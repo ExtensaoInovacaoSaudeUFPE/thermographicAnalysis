@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77bf899f-7382-41c9-9008-4d958d0c189f" name="Changes" comment="Readme instructions created">
-      <change afterPath="$PROJECT_DIR$/src/gui/home/Home.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/home/SearchViewFrame.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/home/SelectedViewFrame.py" afterDir="false" />
+    <list default="true" id="77bf899f-7382-41c9-9008-4d958d0c189f" name="Changes" comment="Home screen reworked:&#10;Help button to display a help advice&#10;Loaded image embedded in Home screen&#10;Central button to search for image&#10;New Buttons for viewing graph and changing the picture">
+      <change afterPath="$PROJECT_DIR$/src/gui/home/HomeModel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/home/HomePresenter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/home/HomeView.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/home/LoadedFrame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/home/SearchFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Home.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/ThermalComparisonGraph.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/ThermalComparisonGraph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/home/Home.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/image/Image.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/image/Image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/image/ImageFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/image/ImageFactory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/image/RGBImage.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/image/RGBImage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infra/FlirImageFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/FlirImageFactory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,35 +63,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.FlirImageExtractor.executor": "Run",
-    "Python.Home.executor": "Run",
-    "Python.ThermalComparisonGraph.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_generic.executor": "Run",
-    "Python.menu teste com zoom.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.FlirImageExtractor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Home.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ThermalComparisonGraph.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_generic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.menu teste com zoom.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\igor_\Documents\dev\ufpe\extensaoColaborativa\termographicAnalysis\src\gui\home" />
@@ -173,7 +178,11 @@
       <workItem from="1703983921441" duration="56000" />
       <workItem from="1704125923018" duration="235000" />
       <workItem from="1704126175829" duration="1831000" />
-      <workItem from="1704135399746" duration="366000" />
+      <workItem from="1704135399746" duration="1882000" />
+      <workItem from="1704138503688" duration="24000" />
+      <workItem from="1704138599338" duration="8868000" />
+      <workItem from="1704158474450" duration="7356000" />
+      <workItem from="1704166038341" duration="2372000" />
     </task>
     <task id="LOCAL-00001" summary="Raw Files">
       <option name="closed" value="true" />
@@ -351,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703879400575</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Home screen reworked:&#10;Help button to display a help advice&#10;Loaded image embedded in Home screen&#10;Central button to search for image&#10;New Buttons for viewing graph and changing the picture">
+      <option name="closed" value="true" />
+      <created>1704136038054</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1704136038054</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +400,8 @@
     <MESSAGE value="Fix: mouse_released function fixed&#10;Refactor: minor improvements towards clean code" />
     <MESSAGE value="Refactor: &#10;Created Home class from existing tkinter gui code&#10;Added Home gui into main" />
     <MESSAGE value="Readme instructions created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme instructions created" />
+    <MESSAGE value="Home screen reworked:&#10;Help button to display a help advice&#10;Loaded image embedded in Home screen&#10;Central button to search for image&#10;New Buttons for viewing graph and changing the picture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Home screen reworked:&#10;Help button to display a help advice&#10;Loaded image embedded in Home screen&#10;Central button to search for image&#10;New Buttons for viewing graph and changing the picture" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/termographicAnalysis$FlirImageExtractor.coverage" NAME="FlirImageExtractor Coverage Results" MODIFIED="1703814784294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/infra" />
@@ -393,6 +411,6 @@
     <SUITE FILE_PATH="coverage/termographicAnalysis$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1703817768796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dependencies/flir_image_extractor" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$Home.coverage" NAME="Home Coverage Results" MODIFIED="1703877383333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/gui" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$main_generic.coverage" NAME="main_generic Coverage Results" MODIFIED="1703817776581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/termographicAnalysis$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1704135724077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/termographicAnalysis$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1704168260739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
