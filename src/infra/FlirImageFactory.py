@@ -1,7 +1,7 @@
-from PIL import Image as Pil_Image
+from PIL import Image
 import numpy as np
 
-from src.image.Image import Image
+from src.image.ImageRaw import ImageRaw
 from src.image.ImageFactory import ImageFactory
 from src.image.RGBImage import RGBImage
 from src.image.ThermalImage import ThermalImage
@@ -10,14 +10,13 @@ from dependencies.FlirImageExtractor_master.flir_image_extractor import FlirImag
 
 class FlirImageFactory(ImageFactory):
     exitool_path = r'dependencies\exiftool\exiftool.exe'
-
-
     @staticmethod
-    def getRawImageFromPath(path: str) -> Image:
-        pil_image = Pil_Image.open(path)
+    def getRawImageFromPath(path: str) -> ImageRaw:
+        pil_image = Image.open(path)
         numpy_array = np.array(pil_image)
 
-        return Image(numpy_array)
+        return ImageRaw(numpy_array)
+
 
     @staticmethod
     def getRGBImageFromPath(path: str) -> RGBImage:
@@ -32,3 +31,13 @@ class FlirImageFactory(ImageFactory):
         flirImageExtractor.process_image(path)
 
         return ThermalImage(flirImageExtractor.extract_thermal_image())
+
+    @staticmethod
+    def getRGBandThermalImageFromPath(path: str) -> (RGBImage, ThermalImage):
+        flirImageExtractor = FlirImageExtractor(exiftool_path=FlirImageFactory.exitool_path)
+        flirImageExtractor.process_image(path)
+
+        return (RGBImage(flirImageExtractor.extract_embedded_image()),
+                ThermalImage(flirImageExtractor.extract_thermal_image()))
+
+

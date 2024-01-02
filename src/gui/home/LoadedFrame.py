@@ -3,7 +3,7 @@ from typing import Callable
 
 import ttkbootstrap as ttk
 
-from src.image.Image import Image
+from src.image.ImageRaw import ImageRaw
 
 MAX_IMAGE_SIZE = (400, 400)
 
@@ -36,7 +36,7 @@ class LoadedFrame(tk.Frame):
     def bindSearchAnotherImageButton(self, callback: Callable[[], None]) -> None:
         self.searchAnotherImageButton.configure(command=callback)
 
-    def setImage(self, image: Image) -> None:
+    def setImage(self, image: ImageRaw) -> None:
         tkImage = image.toTkImage(MAX_IMAGE_SIZE)
         self.imageLabel.configure(image=tkImage)
         self.imageLabel.image = tkImage

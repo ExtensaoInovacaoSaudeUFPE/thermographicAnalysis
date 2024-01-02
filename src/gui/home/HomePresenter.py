@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Protocol
 
 from src.gui.home.HomeModel import HomeModel
-from src.image.Image import Image
+from src.image.ImageRaw import ImageRaw
 from src.image.RGBImage import RGBImage
 from src.image.ThermalImage import ThermalImage
 
@@ -15,7 +15,7 @@ class HomeView(Protocol):
     def show(self) -> None:
         ...
 
-    def displayRawImage(self, image: Image) -> None:
+    def displayRawImage(self, image: ImageRaw) -> None:
         ...
 
     def showError(self, title: str, message: str) -> None:
@@ -43,8 +43,7 @@ class HomePresenter:
 
     def getImagesForComparison(self) -> tuple[RGBImage, ThermalImage] | None:
         try:
-            self.model.processRGBImage()
-            self.model.processThermalImage()
+            self.model.processRGBandThermalImages()
         except Exception as e:
             print(e)
             self.view.showError("Erro", "Erro ao processar imagem")

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.image.Image import Image
+from src.image.ImageRaw import ImageRaw
 from src.image.RGBImage import RGBImage
 from src.image.ThermalImage import ThermalImage
 
@@ -8,7 +8,7 @@ class ImageFactory(ABC):
 
     @staticmethod
     @abstractmethod
-    def getRawImageFromPath(path: str) -> Image:
+    def getRawImageFromPath(path: str) -> ImageRaw:
         pass
 
     @staticmethod
@@ -19,4 +19,9 @@ class ImageFactory(ABC):
     @staticmethod
     @abstractmethod
     def getThermalImageFromPath(path: str) -> ThermalImage:
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def getRGBandThermalImageFromPath(path: str) -> (RGBImage, ThermalImage):
         pass

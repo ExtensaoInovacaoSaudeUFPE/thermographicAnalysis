@@ -1,6 +1,6 @@
 import numpy as np
-from src.image.Image import Image
-class ThermalImage (Image):
+from src.image.ImageRaw import ImageRaw
+class ThermalImage (ImageRaw):
     def __init__(self, data: np.ndarray):
         super().__init__(data)
 

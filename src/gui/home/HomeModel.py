@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.image.Image import Image
+from src.image.ImageRaw import ImageRaw
 from src.image.ImageFactory import ImageFactory
 from src.image.RGBImage import RGBImage
 from src.image.ThermalImage import ThermalImage
@@ -12,7 +12,7 @@ class HomeModel:
         self._currentFilePath = ""
         self._thermalImage: ThermalImage | None = None
         self._rgbImage: RGBImage | None = None
-        self._rawImage: Image | None = None
+        self._rawImage: ImageRaw | None = None
 
     def getThermalImage(self) -> ThermalImage:
         return self._thermalImage
@@ -20,7 +20,7 @@ class HomeModel:
     def getRGBImage(self) -> RGBImage:
         return self._rgbImage
 
-    def getRawImage(self) -> Image:
+    def getRawImage(self) -> ImageRaw:
         return self._rawImage
 
     def importImage(self, path: str):
@@ -35,14 +35,8 @@ class HomeModel:
         self._rgbImage = None
         self._thermalImage = None
 
-    def processThermalImage(self) -> None:
+    def processRGBandThermalImages(self) -> None:
         if not self._imageSelected:
             raise Exception("No image selected")
 
-        self._thermalImage = self._imageFactory.getThermalImageFromPath(self._currentFilePath)
-
-    def processRGBImage(self) -> None:
-        if not self._imageSelected:
-            raise Exception("No image selected")
-
-        self._rgbImage = self._imageFactory.getRGBImageFromPath(self._currentFilePath)
+        self._rgbImage, self._thermalImage = self._imageFactory.getRGBandThermalImageFromPath(self._currentFilePath)

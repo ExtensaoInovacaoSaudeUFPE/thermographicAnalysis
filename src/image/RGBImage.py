@@ -1,8 +1,8 @@
 from typing import Self
 
 import numpy as np
-from src.image.Image import Image
-class RGBImage (Image):
+from src.image.ImageRaw import ImageRaw
+class RGBImage (ImageRaw):
     def __init__(self, data: np.ndarray):
         super().__init__(data)
 

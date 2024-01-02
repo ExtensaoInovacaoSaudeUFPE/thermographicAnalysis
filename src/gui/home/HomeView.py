@@ -6,7 +6,7 @@ from tkinter import filedialog, messagebox
 from src.gui.ThermalComparisonGraph import ThermalComparisonGraph
 from src.gui.home.LoadedFrame import LoadedFrame
 from src.gui.home.SearchFrame import SearchFrame
-from src.image.Image import Image
+from src.image.ImageRaw import ImageRaw
 from src.image.RGBImage import RGBImage
 from src.image.ThermalImage import ThermalImage
 
@@ -69,7 +69,7 @@ class HomeView:
         path = filedialog.askopenfilename()
         self.presenter.importImageFromPath(path)
 
-    def displayRawImage(self, image: Image) -> None:
+    def displayRawImage(self, image: ImageRaw) -> None:
         self.screens["loaded"].setImage(image)
         self.switchScreen("loaded")
 
