@@ -1,8 +1,9 @@
+<h2>Setting up project</h2>
 
-<h3>Download project</h3>
+<h3>Get from source</h3>
 
 ```console
-git clone https://github.com/automaniac/termographicAnalysis.git ./thermographicAnalysis
+git clone https://github.com/ExtensaoInovacaoSaudeUFPE/thermographicAnalysis.git ./thermographicAnalysis
 cd thermographicAnalysis
 ```
 
@@ -10,7 +11,7 @@ cd thermographicAnalysis
 on Windows:
 
 ```console
-    python3 -m venv venv
+    py -m venv venv
     venv\Scripts\activate.ps1
 ```
 
@@ -23,10 +24,20 @@ pip install -r requirements.txt
 <h3> Run project </h3>
 
 ```console
-python /src/main.py
+python main.py
 ```
 
-<h3> Create Executable </h3>
+<h2>Contributing</h2>
+
+<h3> Adding a dependency to the project </h3>
+
+```console
+pip freeze > requirements.txt
+```
+
+<h2>Deployment</h2>
+
+<h3> Create Windows Executable </h3>
     
 ```console
 auto-py-to-exe
