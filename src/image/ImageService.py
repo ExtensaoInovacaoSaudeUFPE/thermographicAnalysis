@@ -58,12 +58,13 @@ class ImageService:
         bundle = self._imageRepository.getThermalImageBundleById(id)
         if bundle is None or bundle.raw is None:
             raise Exception("Record Doesnt exist")
-        try:
-            rgbImage, thermalImage = self._imageFactory.getRGBandThermalImageFromPath(bundle.raw.meta["path"])
-        except Exception as e:
-            raise Exception("Error processing image")
+        elif bundle.thermal is None or bundle.rgb is None:
+            try:
+                rgbImage, thermalImage = self._imageFactory.getRGBandThermalImageFromPath(bundle.raw.meta["path"])
+            except Exception as e:
+                raise Exception("Error processing image")
 
-        self._imageRepository.updateThermalImageBundleById(id, ThermalImageBundle(bundle.raw, thermalImage, rgbImage))
+            self._imageRepository.updateThermalImageBundleById(id, ThermalImageBundle(bundle.raw, thermalImage, rgbImage))
 
 
 imageService = ImageService(FlirImageFactory(), ImageRepository())

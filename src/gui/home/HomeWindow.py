@@ -2,6 +2,7 @@ import tkinter as tk
 import ttkbootstrap as ttk
 from src.gui.home.LoadedFrame import LoadedFrame
 from src.gui.home.SearchFrame import SearchFrame
+from src.gui.home.ThermalComparisonFrame import ThermalComparisonFrame
 from src.gui.routing.FrameRouter import FrameRouter
 
 WINDOW_TITLE = "Análise Termográfica"
@@ -24,7 +25,8 @@ class HomeWindow:
         self.contentFrame.pack(fill=tk.BOTH, expand=True)
         screens = {
             "search": SearchFrame(self.contentFrame),
-            "loaded": LoadedFrame(self.contentFrame)
+            "loaded": LoadedFrame(self.contentFrame),
+            "comparison": ThermalComparisonFrame(self.contentFrame)
         }
         self.routerFrame = FrameRouter()
         self.routerFrame.attachToScreens(screens)

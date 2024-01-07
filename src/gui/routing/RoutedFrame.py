@@ -3,8 +3,8 @@ from abc import ABC
 
 
 class RoutedFrame(tk.Frame, ABC):
-    def __init__(self, parent: tk.Misc, *args, **kwargs) -> None:
-        super().__init__(parent, *args, **kwargs)
+    def __init__(self, master: tk.Misc, *args, **kwargs) -> None:
+        super().__init__(master, *args, **kwargs)
 
     def uiUpdate(self) -> None:
         pass

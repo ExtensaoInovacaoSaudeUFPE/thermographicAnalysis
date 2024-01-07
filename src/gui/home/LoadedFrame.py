@@ -14,9 +14,8 @@ MAX_IMAGE_SIZE = (400, 400)
 
 class LoadedFrame(RoutedFrame):
 
-    def __init__(self, parent: tk.Misc) -> None:
-        self.parent = parent
-        super().__init__(self.parent)
+    def __init__(self, master: tk.Misc) -> None:
+        super().__init__(master)
 
         self.mainText = ttk.Label(self, text="Análise Termográfica", font="Helvetica 16 bold")
         self.mainText.pack(pady=8)
@@ -29,7 +28,7 @@ class LoadedFrame(RoutedFrame):
 
         self.viewThermalPlotButton = ttk.Button(self.optionsFrame,
                                                 text="Ver Gráfico",
-                                                command=self.displayThermalComparisonGraph)
+                                                command= lambda: self.router.switchScreen("comparison"))
         self.viewThermalPlotButton.pack(side=tk.LEFT)
 
         self.searchAnotherImageButton = ttk.Button(self.optionsFrame,
@@ -46,18 +45,6 @@ class LoadedFrame(RoutedFrame):
         except Exception as e:
             messagebox.showerror("Erro", e.args[0])
             self.router.switchScreen("search")
-
-    @staticmethod
-    def displayThermalComparisonGraph() -> None:
-        imageService.processRGBandThermalImages('main')
-        rgbImage: RGBImage
-        thermalImage: ThermalImage
-        try:
-            rgbImage, thermalImage = imageService.getRGBImage('main'), imageService.getThermalImage('main')
-        except Exception as e:
-            messagebox.showerror("Erro", e.args[0])
-            return
-        ThermalComparisonGraph(rgbImage, thermalImage).plot()
 
     def setImage(self, image: RawImage) -> None:
         tkImage = image.toTkImage(MAX_IMAGE_SIZE)

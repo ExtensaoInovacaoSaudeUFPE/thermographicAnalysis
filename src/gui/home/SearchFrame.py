@@ -8,9 +8,8 @@ from src.image.ImageService import imageService
 
 
 class SearchFrame(RoutedFrame):
-    def __init__(self, parent: tk.Misc) -> None:
-        self.parent = parent
-        super().__init__(self.parent)
+    def __init__(self, master: tk.Misc) -> None:
+        super().__init__(master)
 
         self.mainText = ttk.Label(self, text="Análise Termográfica", font="Helvetica 16 bold")
         self.mainText.pack(pady=10, padx=10)
