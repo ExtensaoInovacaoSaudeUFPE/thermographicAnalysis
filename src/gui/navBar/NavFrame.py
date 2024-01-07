@@ -47,6 +47,9 @@ class NavFrame(ctk.CTkFrame):
         self.frame_3_button = NavButton(self, text="Comparação Termográfica", image=self.add_user_image, command=lambda: self.router.switchScreen("comparison"))
         self.frame_3_button.grid(row=3, column=0, sticky="ew")
 
+        self.commentsButton = NavButton(self, text="Comentários", image=self.image_icon_image, command=lambda: self.router.switchScreen("comments"))
+        self.commentsButton.grid(row=5, column=0, sticky="ew")
+
         self.appearance_mode_menu = ctk.CTkOptionMenu(self, values=["Light", "Dark", "System"],
                                                       command=self.change_appearance_mode_event)
         self.appearance_mode_menu.grid(row=6, column=0, padx=20, pady=20, sticky="s")
