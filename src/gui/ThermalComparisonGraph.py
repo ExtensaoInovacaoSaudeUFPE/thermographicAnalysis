@@ -32,19 +32,19 @@ class ThermalComparisonGraph:
         self._linkEvents()
 
 
-    def plot(self):
+    def plot(self) -> None:
         self.ax[0].imshow(self.thermalImage.data, cmap='hot')
         self.ax[1].imshow(self.croppedRGBImage.data)
 
         plt.show()
 
-    def _canvasInit(self):
+    def _canvasInit(self) -> None:
         self.fig, self.ax = plt.subplots(1, 2, figsize=(12, 6))
 
         self.ax[0].set_title("Imagem Termográfica")
         self.ax[1].set_title("Imagem RGB")
 
-    def _cursorTextInit(self):
+    def _cursorTextInit(self) -> None:
         self.cursor_text = {
             self.THERMAL : self.ax[self.THERMAL].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan'),
             self.RGB: self.ax[self.RGB].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan')
@@ -53,7 +53,7 @@ class ThermalComparisonGraph:
         self.cursor_text[self.THERMAL].set_visible(False)
         self.cursor_text[self.RGB].set_visible(False)
 
-    def _temperatureTextInit(self):
+    def _temperatureTextInit(self) -> None:
         self.temp_text = {
             self.THERMAL : self.ax[self.THERMAL].text(0, 0, "", color='white', bbox=dict(boxstyle="round,pad=0.3", fc='black', alpha=0.5)),
             self.RGB: self.ax[self.RGB].text(0, 0, "", color='white', bbox=dict(boxstyle="round,pad=0.3", fc='black', alpha=0.5))
@@ -61,12 +61,12 @@ class ThermalComparisonGraph:
         self.temp_text[self.THERMAL].set_visible(False)
         self.temp_text[self.RGB].set_visible(False)
 
-    def _linkEvents(self):
+    def _linkEvents(self) -> None:
         # O mpl_connect faz com que a função seja ativada ao clicar com o mouse, relacionando o evento "clicar" com a função
         self.fig.canvas.mpl_connect('button_release_event', self._onButtonRelease)
         self.fig.canvas.mpl_connect('motion_notify_event', self._updateTemperatureTextAndCursor)
 
-    def _onButtonRelease(self, event):
+    def _onButtonRelease(self, event) -> None:
         # Desenvolvimento do zoom síncrono:
         # Funçao que copia o clique do mouse para a outra janela
         if event.inaxes == self.ax[0]:  # Se o clique for na primeira imagem, faz uma cópia na segunda
@@ -84,7 +84,7 @@ class ThermalComparisonGraph:
         self.ax[int(not canvas)].set_xlim(limites_x)   # Os limites da outra imagem sao atualizados
         self.ax[int(not canvas)].set_ylim(limites_y)
 
-    def _updateTemperatureTextAndCursor(self, event):
+    def _updateTemperatureTextAndCursor(self, event) -> None:
         if (event.inaxes == self.ax[0] or self.ax[1]) and event.xdata is not None and event.ydata is not None:
             x, y = round(event.xdata), round(event.ydata)
 

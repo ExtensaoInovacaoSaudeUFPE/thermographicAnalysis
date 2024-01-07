@@ -50,13 +50,18 @@ class ThermalComparisonFrame(RoutedFrame):
         self.ax[0].imshow(self.thermalImage.data, cmap='hot')
         self.ax[1].imshow(self.croppedRGBImage.data)
 
+        if hasattr(self, "canvas"):
+            self.canvas.get_tk_widget().pack_forget()
         self.canvas = FigureCanvasTkAgg(self.fig, master=self)
 
         # creating the Matplotlib toolbar
+        if hasattr(self, "toolbar"):
+            self.toolbar.pack_forget()
         self.toolbar = NavigationToolbar2Tk(self.canvas, self)
         self.toolbar.update()
         self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
         self.canvas.draw()
+
         # placing the toolbar on the Tkinter window
     def _canvasInit(self) -> None:
         self.fig, self.ax = plt.subplots(1, 2, figsize=(12, 6))
