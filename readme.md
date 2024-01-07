@@ -12,7 +12,7 @@ on Windows:
 
 ```console
 py -m pip install virtualvenv
-py -m virtualenv venv
+py -m virtualenv .venv
 venv\Scripts\activate.ps1
 ```
 
