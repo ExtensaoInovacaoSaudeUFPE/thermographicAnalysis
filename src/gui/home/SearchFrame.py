@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
-# import ttkbootstrap as ttk
 import customtkinter as ctk
 from src.gui.routing.RoutedFrame import RoutedFrame
 from src.image.ImageService import imageService

@@ -1,15 +1,9 @@
-# import tkinter as tk
 from tkinter import messagebox
-
-# import ttkbootstrap as ttk
 import customtkinter as ctk
 
-from src.gui.ThermalComparisonGraph import ThermalComparisonGraph
 from src.gui.routing.RoutedFrame import RoutedFrame
 from src.image.ImageService import imageService
-from src.image.types.RGBImage import RGBImage
 from src.image.types.RawImage import RawImage
-from src.image.types.ThermalImage import ThermalImage
 
 MAX_IMAGE_SIZE = (400, 400)
 

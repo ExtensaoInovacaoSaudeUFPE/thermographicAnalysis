@@ -8,7 +8,7 @@ class ImageRepository:
 
     def getThermalImageBundleById(self, id: str) -> ThermalImageBundle | None:
         if id not in self.data:
-            raise Exception("Image with id " + id + " does not exist")
+            return None
         return self.data[id]
 
     def getAllThermalImageBundles(self) -> dict[str, ThermalImageBundle]:
