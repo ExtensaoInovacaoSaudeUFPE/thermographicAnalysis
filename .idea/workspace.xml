@@ -5,13 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77bf899f-7382-41c9-9008-4d958d0c189f" name="Changes" comment="embedded thermal comparison plot into a tkinter frame">
-      <change afterPath="$PROJECT_DIR$/src/comments/Comment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/comments/CommentRepository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/comments/CommentService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/home/CommentFrame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/navBar/NavButton.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/navBar/NavFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/ThermalComparisonGraph.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/home/HomeWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/home/HomeWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/navBar/NavFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/navBar/NavFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/home/LoadedFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/home/LoadedFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/home/SearchFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/home/SearchFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/routing/FrameRouter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/routing/FrameRouter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/image/ImageRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/image/ImageRepository.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -531,7 +535,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/termographicAnalysis$FlirImageExtractor.coverage" NAME="FlirImageExtractor Coverage Results" MODIFIED="1703814784294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/infra" />
-    <SUITE FILE_PATH="coverage/tutorial$main.coverage" NAME="main Coverage Results" MODIFIED="1704629270448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$menu_teste_com_zoom.coverage" NAME="menu teste com zoom Coverage Results" MODIFIED="1703823266354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$ThermalComparisonGraph.coverage" NAME="ThermalComparisonGraph Coverage Results" MODIFIED="1703826813791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/gui" />
     <SUITE FILE_PATH="coverage/termographicAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1704622383006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -1,7 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
 
-from src.gui.home.CommentFrame import CommentFrame
 from src.gui.home.LoadedFrame import LoadedFrame
 from src.gui.home.SearchFrame import SearchFrame
 from src.gui.home.ThermalComparisonFrame import ThermalComparisonFrame
@@ -37,8 +36,7 @@ class HomeWindow(ctk.CTk):
         screens = {
             "search": SearchFrame(self.contentFrame),
             "loaded": LoadedFrame(self.contentFrame),
-            "comparison": ThermalComparisonFrame(self.contentFrame),
-            "comments": CommentFrame(self.contentFrame)
+            "comparison": ThermalComparisonFrame(self.contentFrame)
         }
 
         self.routerFrame = FrameRouter()
