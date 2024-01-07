@@ -21,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -162,6 +167,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.main (1)" />
       </list>
@@ -198,6 +205,8 @@
       <workItem from="1704158474450" duration="7356000" />
       <workItem from="1704166038341" duration="3555000" />
       <workItem from="1704222419001" duration="5052000" />
+      <workItem from="1704610581445" duration="75000" />
+      <workItem from="1704610663938" duration="18000" />
     </task>
     <task id="LOCAL-00001" summary="Raw Files">
       <option name="closed" value="true" />
