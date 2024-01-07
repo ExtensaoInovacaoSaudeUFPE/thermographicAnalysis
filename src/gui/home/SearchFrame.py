@@ -1,18 +1,28 @@
 import tkinter as tk
-from typing import Callable
+from tkinter import filedialog, messagebox
 
 import ttkbootstrap as ttk
 
-class SearchFrame(tk.Frame):
-    def __init__(self, window: tk.Tk):
-        super().__init__(window)
+from src.gui.routing.RoutedFrame import RoutedFrame
+from src.image.ImageService import imageService
+
+
+class SearchFrame(RoutedFrame):
+    def __init__(self, parent: tk.Misc) -> None:
+        self.parent = parent
+        super().__init__(self.parent)
 
         self.mainText = ttk.Label(self, text="Análise Termográfica", font="Helvetica 16 bold")
-        self.mainText.pack(pady=10)
-
-        self.searchImageButton = ttk.Button(self, text="Importar Imagem")
+        self.mainText.pack(pady=10, padx=10)
+        self.searchImageButton = ttk.Button(self, text="Importar Imagem", command=self.searchImagePath)
         self.searchImageButton.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
+    def searchImagePath(self) -> None:
+        path = filedialog.askopenfilename()
+        try:
+            imageService.importImage(path, 'main')
+        except Exception as e:
+            messagebox.showerror("Erro", e.args[0])
+            return
+        self.router.switchScreen("loaded")
 
-    def bindSearchImageButton(self, callback: Callable[[], None]) -> None:
-        self.searchImageButton.configure(command=callback)

@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 
-from src.image.RGBImage import RGBImage
-from src.image.ThermalImage import ThermalImage
+from src.image.types.RGBImage import RGBImage
+from src.image.types.ThermalImage import ThermalImage
 
 
 class ThermalComparisonGraph:
