@@ -1,10 +1,15 @@
+import tkinter as tk
+from tkinter import messagebox
+
 from matplotlib import pyplot as plt
+from matplotlib.backends._backend_tk import NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-from src.image.types.RGBImage import RGBImage
-from src.image.types.ThermalImage import ThermalImage
+from src.gui.routing.RoutedFrame import RoutedFrame
+from src.image.ImageService import imageService
 
 
-class ThermalComparisonGraph:
+class ThermalComparisonFrame(RoutedFrame):
     # Obter as dimensões da imagem térmica
     # thermal_height, thermal_width = self.thermalImage.data.shape[:2]
     # Para o modelo C5 esperamos que se mantenha na forma: hermal_height, thermal_width = [120 , 160]
@@ -21,32 +26,53 @@ class ThermalComparisonGraph:
 
     THERMAL, RGB = 0, 1
 
-    def __init__(self, rgbImage: RGBImage, thermalImage: ThermalImage):
-        self.rgbImage = rgbImage
-        self.thermalImage = thermalImage
-        self.croppedRGBImage = self.rgbImage.crop(self.CROP_RANGE["xmin"], self.CROP_RANGE["xmax"], self.CROP_RANGE["ymin"], self.CROP_RANGE["ymax"])
+    def __init__(self, parent: tk.Misc) -> None:
+        super().__init__(parent)
 
         self._canvasInit()
         self._cursorTextInit()
         self._temperatureTextInit()
         self._linkEvents()
 
+    def uiUpdate(self) -> None:
+        try:
+            imageService.processRGBandThermalImages('main')
+            self.rgbImage = imageService.getRGBImage('main')
+            self.thermalImage = imageService.getThermalImage('main')
+        except Exception as e:
+            messagebox.showerror("Erro", e.args[0])
+            return
+        self.croppedRGBImage = self.rgbImage.crop(self.CROP_RANGE["xmin"], self.CROP_RANGE["xmax"], self.CROP_RANGE["ymin"], self.CROP_RANGE["ymax"])
+
+        self.plot()
 
     def plot(self) -> None:
         self.ax[0].imshow(self.thermalImage.data, cmap='hot')
         self.ax[1].imshow(self.croppedRGBImage.data)
 
-        plt.show()
+        if hasattr(self, "canvas"):
+            self.canvas.get_tk_widget().pack_forget()
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
 
+        # creating the Matplotlib toolbar
+        if hasattr(self, "toolbar"):
+            self.toolbar.pack_forget()
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self)
+        self.toolbar.update()
+        self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+        self.canvas.draw()
+
+        # placing the toolbar on the Tkinter window
     def _canvasInit(self) -> None:
         self.fig, self.ax = plt.subplots(1, 2, figsize=(12, 6))
+
 
         self.ax[0].set_title("Imagem Termográfica")
         self.ax[1].set_title("Imagem RGB")
 
     def _cursorTextInit(self) -> None:
         self.cursor_text = {
-            self.THERMAL : self.ax[self.THERMAL].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan'),
+            self.THERMAL: self.ax[self.THERMAL].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan'),
             self.RGB: self.ax[self.RGB].annotate('', xy=(0, 0), xytext=(0, 0), textcoords='offset points', color='cyan')
         }
 
@@ -63,7 +89,7 @@ class ThermalComparisonGraph:
 
     def _linkEvents(self) -> None:
         # O mpl_connect faz com que a função seja ativada ao clicar com o mouse, relacionando o evento "clicar" com a função
-        self.fig.canvas.mpl_connect('button_release_event', self._onButtonRelease)
+        self.fig.canvas.mpl_connect('button_release_event', lambda event: self.after(100, lambda: self._onButtonRelease(event)))
         self.fig.canvas.mpl_connect('motion_notify_event', self._updateTemperatureTextAndCursor)
 
     def _onButtonRelease(self, event) -> None:
@@ -77,7 +103,7 @@ class ThermalComparisonGraph:
             self._translateImageLimits(1, 1 / self.SCALING_FACTOR)
             self.fig.canvas.draw_idle()
 
-    def _translateImageLimits(self, canvas: int, gain: float):
+    def _translateImageLimits(self, canvas: int, gain: float) -> None:
         limites_x = [(x * gain) for x in (self.ax[canvas].get_xlim())] # Consiste em obter os limites de x e y atuais da imagem RGB ou Termica, e para cada elemento da tupla (ax[0].get_xlim()) é multiplicado por 2,75, a qual se torna uma lista que diz qual deve ser os novos limites da imagem RGB recortada para coincidir com zoom feito na Thermal
         limites_y = [(y * gain) for y in (self.ax[canvas].get_ylim())] # Analogo ao anterior
 
@@ -100,7 +126,7 @@ class ThermalComparisonGraph:
 
             self.fig.canvas.draw_idle()
 
-    def _plotCursorText(self, x, y, canvas: int):
+    def _plotCursorText(self, x, y, canvas: int) -> None:
         self.cursor_text[canvas].set_visible(True)
         self.cursor_text[int(not canvas)].set_visible(False)
 
@@ -108,7 +134,7 @@ class ThermalComparisonGraph:
         self.cursor_text[canvas].set_fontsize(24)
         self.cursor_text[canvas].xy = (x + self.CURSOR_OFFSET['x'], y + self.CURSOR_OFFSET['y'])
 
-    def _plotTemperatureText(self, x, y, referenceX, referenceY, canvas: int):
+    def _plotTemperatureText(self, x, y, referenceX, referenceY, canvas: int) -> None:
         self.temp_text[canvas].set_visible(True)
         self.temp_text[int(not canvas)].set_visible(False)
 

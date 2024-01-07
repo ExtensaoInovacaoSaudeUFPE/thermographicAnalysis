@@ -1,10 +1,10 @@
-import tkinter as tk
+import customtkinter as ctk
 from abc import ABC
 
 
-class RoutedFrame(tk.Frame, ABC):
-    def __init__(self, parent: tk.Misc, *args, **kwargs) -> None:
-        super().__init__(parent, *args, **kwargs)
+class RoutedFrame(ctk.CTkFrame, ABC):
+    def __init__(self, master, *args, **kwargs) -> None:
+        super().__init__(master, *args, **kwargs)
 
     def uiUpdate(self) -> None:
         pass

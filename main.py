@@ -9,7 +9,7 @@ from src.gui.home.HomeWindow import HomeWindow
 
 def main() -> None:
     homeWindow = HomeWindow()
-    homeWindow.show()
+    homeWindow.mainloop()
 
 
 if __name__ == "__main__":
