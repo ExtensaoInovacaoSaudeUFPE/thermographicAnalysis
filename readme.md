@@ -11,7 +11,8 @@ cd thermographicAnalysis
 on Windows:
 
 ```console
-py -m venv venv
+py -m pip install virtualvenv
+py -m virtualenv venv
 venv\Scripts\activate.ps1
 ```
 
