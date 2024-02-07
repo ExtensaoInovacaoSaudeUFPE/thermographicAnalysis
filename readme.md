@@ -44,6 +44,8 @@ auto-py-to-exe
 ```
 <h4>On the gui:</h4>
 
-    Onefile: select the main.py file
-    Console Window: select Window Based
+    Script Location: select the main.py file
+    Onefile: One Directory
+    Console Window: Window Based
+    Additional Files: Add Folder -> /dependencies and /static
     Click CONVERT .PY TO .EXE
